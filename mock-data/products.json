@@ -1,0 +1,162 @@
+[
+  {
+    "id": "1",
+    "name": "Product 1",
+    "price": 29.99,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "image": "https://stabraq.com/cdn/shop/files/Artboard10_682b2946-a261-4a8b-8790-5a0a5f77cb71.jpg?v=1702570373",
+    "stock": 50,
+    "onSale": true,
+    "category": "Electronics"
+  },
+  {
+    "id": "2",
+    "name": "Product 2",
+    "price": 49.99,
+    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "image": "https://placehold.co/400",
+    "stock": 30,
+    "onSale": false,
+    "category": "Clothing"
+  },
+  {
+    "id": "3",
+    "name": "Product 3",
+    "price": 39.99,
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image": "https://placehold.co/400",
+    "stock": 20,
+    "onSale": true,
+    "category": "Home & Kitchen"
+  },
+  {
+    "id": "4",
+    "name": "Product 4",
+    "price": 19.99,
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "image": "https://placehold.co/400",
+    "stock": 45,
+    "onSale": false,
+    "category": "Beauty"
+  },
+  {
+    "id": "5",
+    "name": "Product 5",
+    "price": 59.99,
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "image": "https://placehold.co/400",
+    "stock": 15,
+    "onSale": true,
+    "category": "Sports & Outdoors"
+  },
+  {
+    "id": "6",
+    "name": "Product 6",
+    "price": 34.99,
+    "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+    "image": "https://placehold.co/400",
+    "stock": 25,
+    "onSale": false,
+    "category": "Toys & Games"
+  },
+  {
+    "id": "7",
+    "name": "Product 7",
+    "price": 44.99,
+    "description": "Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+    "image": "https://placehold.co/400",
+    "stock": 35,
+    "onSale": true,
+    "category": "Books"
+  },
+  {
+    "id": "8",
+    "name": "Product 8",
+    "price": 27.99,
+    "description": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+    "image": "https://placehold.co/400",
+    "stock": 40,
+    "onSale": false,
+    "category": "Health & Personal Care"
+  },
+  {
+    "id": "9",
+    "name": "Product 9",
+    "price": 22.99,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "image": "https://placehold.co/400",
+    "stock": 20,
+    "onSale": true,
+    "category": "Electronics"
+  },
+  {
+    "id": "10",
+    "name": "Product 10",
+    "price": 31.99,
+    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "image": "https://placehold.co/400",
+    "stock": 30,
+    "onSale": false,
+    "category": "Clothing"
+  },
+  {
+    "id": "11",
+    "name": "Product 11",
+    "price": 41.99,
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image": "https://placehold.co/400",
+    "stock": 25,
+    "onSale": true,
+    "category": "Home & Kitchen"
+  },
+  {
+    "id": "12",
+    "name": "Product 12",
+    "price": 16.99,
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "image": "https://placehold.co/400",
+    "stock": 15,
+    "onSale": false,
+    "category": "Beauty"
+  },
+  {
+    "id": "13",
+    "name": "Product 13",
+    "price": 55.99,
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "image": "https://placehold.co/400",
+    "stock": 30,
+    "onSale": true,
+    "category": "Sports & Outdoors"
+  },
+  {
+    "id": "14",
+    "name": "Product 14",
+    "price": 29.99,
+    "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+    "image": "https://placehold.co/400",
+    "stock": 40,
+    "onSale": false,
+    "category": "Toys & Games"
+  },
+  {
+    "id": "15",
+    "name": "Product 15",
+    "price": 37.99,
+    "description": "Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+    "image": "https://placehold.co/400",
+    "stock": 20,
+    "onSale": true,
+    "category": "Books"
+  },
+  {
+    "id": "16",
+    "name": "Product 16",
+    "price": 24.99,
+    "description": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+    "image": "https://placehold.co/400",
+    "stock": 35,
+    "onSale": false,
+    "category": "Health & Personal Care"
+  }
+]

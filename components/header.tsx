@@ -3,6 +3,7 @@ import { useClerk } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { useTransition } from "react";
 import Link from "next/link";
+import Cart from "./cart";
 
 export default function Header() {
   const { user, signOut } = useClerk();
@@ -19,20 +20,23 @@ export default function Header() {
       <Link href="/">
         <h1 className="text-primary font-black text-3xl">ABDO</h1>
       </Link>
-      {user ? (
-        <Button onClick={handleSignOut} disabled={isPending}>
-          Logout
-        </Button>
-      ) : (
-        <div className="space-x-2">
-          <Link href="/auth/login">
-            <Button variant="ghost">Login</Button>
-          </Link>
-          <Link href="/auth/register">
-            <Button>Register</Button>
-          </Link>
-        </div>
-      )}
+      <div className="space-x-2 flex items-center">
+        <Cart />
+        {user ? (
+          <Button onClick={handleSignOut} disabled={isPending}>
+            Logout
+          </Button>
+        ) : (
+          <>
+            <Button variant="outline" asChild>
+              <Link href="/auth/login">Login</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/auth/register">Register</Link>
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 }
