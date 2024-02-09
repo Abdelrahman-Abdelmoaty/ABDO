@@ -29,7 +29,7 @@ import { FormSuccess } from "@/components/form-success";
 import { useSignUp } from "@clerk/nextjs";
 import { toast } from "sonner";
 
-export default function page() {
+export default function Register() {
   const form = useForm<RegisterForm>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {

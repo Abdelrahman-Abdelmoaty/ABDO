@@ -29,7 +29,7 @@ import { toast } from "sonner";
 import { login } from "@/actions/login";
 import { useSignIn } from "@clerk/nextjs";
 
-export default function page() {
+export default function Login() {
   const form = useForm<LoginForm>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
