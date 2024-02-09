@@ -19,10 +19,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { redirect } from "next/navigation";
-import { getProducts } from "@/data/products";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { getColors, getProducts } from "@/data/products";
+
+import Link from "next/link";
+import CustomRadioButton from "@/components/custom-radio-button";
 
 export default async function page({
   searchParams: { query, category, color },
@@ -32,23 +32,24 @@ export default async function page({
   let products = await getProducts();
 
   if (query) {
-    console.log(products);
     products =
       products?.filter((product) => product.name.toLowerCase().includes(query.toLowerCase())) ||
       null;
   }
 
   if (category) {
-    console.log(products);
     products =
-      products?.filter((product) => product.category.toLowerCase() === category.toLowerCase()) ||
+      products?.filter((product) => product.category?.toLowerCase() === category.toLowerCase()) ||
       null;
   }
-  console.log(products);
 
   if (color) {
     products =
-      products?.filter((product) => product.color.toLowerCase() === color.toLowerCase()) || null;
+      products?.filter((product) => {
+        return product.productColors.some((pc) => {
+          return pc.color.name.toLowerCase() === color.toLowerCase();
+        });
+      }) || null;
   }
 
   const handleSearch = async (formData: FormData) => {
@@ -73,21 +74,9 @@ export default async function page({
 
     redirect(redirectUrl);
   };
-  const handleColor = async (formData: FormData) => {
-    "use server";
-    console.log(formData);
 
-    // const color = formData.get("color") as string;
-    // let redirectUrl = "?";
-
-    // if (color) {
-    //   redirectUrl += `color=${color}&`;
-
-    //   redirect(redirectUrl);
-    // }
-  };
-  const categories = ["jeans", "sweatpants", "hoddies"];
-  const colors = ["beige", "blue", "black"];
+  const categories = ["jeans", "sweatpants", "hoodies"];
+  const colors = await getColors();
 
   return (
     <>
@@ -101,44 +90,41 @@ export default async function page({
               <MagnifyingGlassIcon className="w-6 h-6 text-muted-foreground mx-2 left-0 top-1/2 absolute -translate-y-1/2" />
               <Input name="query" type="text" placeholder="Search" className="pl-10" />
             </div>
-
-            {colors.map((color) => (
-              <input
-                type="radio"
-                name="color"
-                id={color}
-                key={color}
-                value={color}
-                formAction={handleColor}
-                className="hidden"
-              />
-            ))}
+            <div className="flex space-x-2">
+              {colors?.map((_color) => (
+                <Link
+                  key={_color.id}
+                  href={`?color=${_color.name}${category ? `&category=${category}` : ""}`}
+                  replace={true}
+                  scroll={false}
+                >
+                  <CustomRadioButton
+                    name="color"
+                    color={_color.hexCode}
+                    checked={_color.name.toLowerCase() === (color || "").toLowerCase()}
+                  />
+                </Link>
+              ))}
+            </div>
 
             <div className="flex space-x-2">
-              <ToggleGroup type="single" className="space-x-3">
-                {colors.map((color) => (
-                  <ToggleGroupItem value={color} key={color} className="p-0">
-                    <label htmlFor={color} className="rounded-full p-3 cursor-pointer">
-                      <div
-                        className="w-5 h-5 rounded-full cursor-pointer"
-                        style={{ backgroundColor: color }}
-                      ></div>
-                    </label>
-                  </ToggleGroupItem>
-                ))}
-              </ToggleGroup>
-            </div>
-            <select name="category" defaultValue="default" className="border px-3 py-2 capitalize">
-              <option value="default" disabled>
-                Category
-              </option>
-              {categories.map((category) => (
-                <option key={category} value={category} className="capitalize">
-                  {category}
-                </option>
+              {categories.map((_category) => (
+                <Link
+                  key={_category}
+                  href={`?${color ? `color=${color}&` : ""}category=${_category}`}
+                  replace={true}
+                  scroll={false}
+                >
+                  <CustomRadioButton
+                    name="color"
+                    checked={_category.toLowerCase() === (category || "").toLowerCase()}
+                    className="h-auto w-auto"
+                  >
+                    {_category}
+                  </CustomRadioButton>
+                </Link>
               ))}
-            </select>
-            <Button type="submit">Apply Filters</Button>
+            </div>
           </div>
         </form>
         {products?.length === 0 && (
@@ -147,9 +133,7 @@ export default async function page({
           </div>
         )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {products?.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {products?.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>
       </div>
     </>

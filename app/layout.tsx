@@ -26,10 +26,12 @@ export default function RootLayout({
     <ClerkProvider>
       <CartProvider cart={[]}>
         <html lang="en">
-          <body className={cn("min-h-screen flex flex-col", poppins.className)}>
-            <Header />
-            <main className="flex-1 py-12 md:py-16 space-y-12 md:space-y-16">{children}</main>
-            <Toaster />
+          <body className={poppins.className}>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main className="flex-1 py-12 md:py-16 space-y-12 md:space-y-16">{children}</main>
+              <Toaster />
+            </div>
           </body>
         </html>
       </CartProvider>

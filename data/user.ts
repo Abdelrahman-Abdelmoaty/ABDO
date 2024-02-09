@@ -19,3 +19,13 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+export const getColors = async () => {
+  try {
+    const colors = await db.color.findMany();
+
+    return colors;
+  } catch {
+    return null;
+  }
+}

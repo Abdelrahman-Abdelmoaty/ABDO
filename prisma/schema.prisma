@@ -1,7 +1,7 @@
 // prisma/schema.prisma
 datasource db {
   provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -10,52 +10,89 @@ generator client {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  password     String?
-  accounts      Account[]
+  id       String  @id @default(cuid())
+  name     String
+  email    String  @unique
+  image    String?
+  password String
+  cart     Cart?
 }
 
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+// emailVerified DateTime?
+// model VerificationToken {
+//   id      String   @id @default(cuid())
+//   email   String
+//   token   String   @unique
+//   expires DateTime
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model VerificationToken {
-  id        String @id @default(cuid())
-  email     String   
-  token     String @unique
-  expires   DateTime
-
-  @@unique([email, token])
-}
+//   @@unique([email, token])
+// }
 
 model Product {
-  id          String   @id @default(cuid())
+  id            String         @id @default(cuid())
+  name          String
+  price         Float
+  description   String?
+  category      String?
+  productColors ProductColor[]
+  productSizes  ProductSize[]
+  stock         Int
+  createdAt     DateTime       @default(now())
+
+  @@unique([id, name])
+}
+
+model ProductColor {
+  id        String   @id @default(cuid())
+  colorId   String
+  color     Color    @relation(fields: [colorId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  images    String[]
+  stock     Int
+
+  @@unique([id])
+}
+
+model Color {
+  id           String         @id @default(cuid())
+  name         String
+  hexCode      String
+  productColor ProductColor[]
+
+  @@unique([id, name])
+}
+
+model ProductSize {
+  id        String  @id @default(cuid())
+  sizeId    String
+  size      Size    @relation(fields: [sizeId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  stock     Int
+
+  @@unique([id])
+}
+
+model Size {
+  id          String        @id @default(cuid())
   name        String
-  price       Float
-  description String?
-  image       String[]
-  category    String?
-  color       String?
-  stock       Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  productSize ProductSize[]
+
+  @@unique([id, name])
+}
+
+model CartItem {
+  id       String @id @default(cuid())
+  size     String
+  quantity Int
+  cartId   String @unique
+  cart     Cart   @relation(fields: [cartId], references: [id])
+}
+
+model Cart {
+  id       String     @id @default(cuid())
+  userId   String     @unique
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products CartItem[]
 }

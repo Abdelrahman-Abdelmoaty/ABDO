@@ -1,0 +1,112 @@
+{/* <div className="grid gap-2">
+          <p className="text-sm font-medium">Colors</p>
+          <RadioGroup className="flex items-center" name="color">
+            {product.productColors.map((color, index) => (
+              <Link
+                key={color.id}
+                href={`?ci=${index}&si=${sizeIndex}`}
+                replace={true}
+                scroll={false}
+                className={cn({
+                  "pointer-events-none": color.stock === 0,
+                })}
+              >
+                <Label
+                  htmlFor={color.id}
+                  className="p-2 border cursor-pointer flex items-center space-x-2 rounded-lg"
+                >
+                  <RadioGroupItem
+                    value={color.id}
+                    id={color.id}
+                    disabled={color.stock === 0}
+                    checked={colorIndex === index}
+                  />
+                  <span
+                    className={cn("leading-none capitalize", {
+                      "text-muted-foreground": color.stock === 0,
+                    })}
+                  >
+                    {color.color.name}
+                  </span>
+                  <div
+                    className="h-4 w-4 rounded-full"
+                    style={{
+                      backgroundColor: color.color.hexCode,
+                    }}
+                  ></div>
+                </Label>
+              </Link>
+            ))}
+          </RadioGroup>
+        </div>
+        <div className="grid gap-2">
+          <p className="text-sm font-medium">Sizes</p>
+          <RadioGroup
+            defaultValue={product.productSizes[sizeIndex].id}
+            className="flex items-center"
+            name="size"
+          >
+            {product.productSizes.map((size, index) => (
+              <Link
+                key={size.id}
+                href={`?ci=${colorIndex}&si=${index}`}
+                replace={true}
+                scroll={false}
+                className={cn({
+                  "pointer-events-none": size.stock === 0,
+                })}
+              >
+                <Label
+                  htmlFor={size.id}
+                  className="p-2 border cursor-pointer flex items-center space-x-2 rounded-lg"
+                >
+                  <RadioGroupItem
+                    value={size.id}
+                    id={size.id}
+                    disabled={size.stock === 0}
+                    checked={sizeIndex === index}
+                  />
+                  <span
+                    className={cn("leading-none uppercase", {
+                      "text-muted-foreground": size.stock === 0,
+                    })}
+                  >
+                    {size.size.name}
+                  </span>
+                </Label>
+              </Link>
+            ))}
+          </RadioGroup>
+        </div> */}
+        {/* <ProductCardButton product={product} /> */}
+
+
+
+
+
+
+                    {/* <div className="flex space-x-2">
+              <ToggleGroup type="single" className="space-x-3">
+                {colors.map((color) => (
+                  <ToggleGroupItem value={color} key={color} className="p-0">
+                    <label htmlFor={color} className="rounded-full p-3 cursor-pointer">
+                      <div
+                        className="w-5 h-5 rounded-full cursor-pointer"
+                        style={{ backgroundColor: color }}
+                      ></div>
+                    </label>
+                  </ToggleGroupItem>
+                ))}
+              </ToggleGroup>
+            </div> */}
+            {/* <select name="category" defaultValue="default" className="border px-3 py-2 capitalize">
+              <option value="default" disabled>
+                Category
+              </option>
+              {categories.map((category) => (
+                <option key={category} value={category} className="capitalize">
+                  {category}
+                </option>
+              ))}
+            </select>
+            <Button type="submit">Apply Filters</Button> */}
