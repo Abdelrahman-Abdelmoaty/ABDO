@@ -20,12 +20,6 @@ export const getUserById = async (id: string) => {
   }
 };
 
-export const getColors = async () => {
-  try {
-    const colors = await db.color.findMany();
-
-    return colors;
-  } catch {
-    return null;
-  }
-}
+export const addToCart = async (userId: string, cartItemId: string) => {
+  
+};

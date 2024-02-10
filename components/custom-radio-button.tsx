@@ -29,7 +29,7 @@ export default function CustomRadioButton({
         >
           <div
             className={
-              "flex items-center justify-center leading-none font-semibold uppercase text-inherit"
+              "flex items-center justify-center leading-none font-bold uppercase text-inherit"
             }
           >
             {children}

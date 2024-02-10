@@ -32,11 +32,11 @@ export default async function ProductCard({ product }: { product: Product }) {
         </div>
       </CardHeader>
       <CardContent>
-        <h3 className="font-semibold text-xl">{product.name}</h3>
+        <h3 className="font-bold text-xl">{product.name}</h3>
         <p className="font-medium text-muted-foreground text-sm whitespace-nowrap text-ellipsis overflow-hidden">
           {product.description}
         </p>
-        <p className="text-lg font-semibold">${product.price}</p>
+        <p className="text-lg font-bold">${product.price}</p>
       </CardContent>
       <CardFooter className="flex items-center justify-between">
         <div className="space-x-2 flex">

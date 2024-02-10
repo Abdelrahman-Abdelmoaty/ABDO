@@ -1,6 +1,5 @@
 "use client";
 import { Cart } from "@/types/cart";
-import { Product } from "@/types/product";
 import { useState, createContext, useContext } from "react";
 import { create } from "zustand";
 

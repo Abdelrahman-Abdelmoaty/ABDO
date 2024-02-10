@@ -4,7 +4,7 @@ import { pathToRegexp } from "path-to-regexp";
 const regexp = pathToRegexp("/shop/:bar");
 
 export default authMiddleware({
-  publicRoutes: ["/", "/shop", regexp],
+  publicRoutes: ["/", "/shop", regexp, "/checkout"],
 });
 
 export const config = {

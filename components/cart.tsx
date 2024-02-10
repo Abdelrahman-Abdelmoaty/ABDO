@@ -1,20 +1,18 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button, buttonVariants } from "./ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "./ui/button";
 import { ShoppingBag, X } from "lucide-react";
 import { useCart } from "@/store/CartProvider";
 import Image from "next/image";
+import { CartItem } from "@/types/cart";
+import Link from "next/link";
 
 export default function Cart() {
   const { cart, setCart } = useCart()();
-  const handleRemoveButton = (id: string) => {
-    const newCart = cart.filter((item) => item.id !== id);
+  const handleRemoveButton = (cartItem: CartItem) => {
+    const newCart = cart.filter(
+      (item) =>
+        item.id !== cartItem.id || item.color !== cartItem.color || item.size !== cartItem.size
+    );
     setCart(newCart);
   };
 
@@ -64,7 +62,7 @@ export default function Cart() {
                     <Button
                       variant="destructive"
                       size="icon"
-                      onClick={() => handleRemoveButton(item.id)}
+                      onClick={() => handleRemoveButton(item)}
                     >
                       <X className="w-4" />
                     </Button>
@@ -74,7 +72,11 @@ export default function Cart() {
             </tbody>
           </table>
         )}
-        {cart.length > 0 && <Button className="mt-auto">Checkout</Button>}
+        {cart.length > 0 && (
+          <Button className="mt-auto" asChild>
+            <Link href="/checkout">Checkout</Link>
+          </Button>
+        )}
       </SheetContent>
     </Sheet>
   );
