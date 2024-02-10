@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Product } from "@/types/product";
+import { Color, Product } from "@/types/product";
 
 export const getProducts = async () => {
   try {
@@ -51,7 +51,7 @@ export const getProductById = async (id: string) => {
 export const getColors = async () => {
   try {
     const colors = await db.color.findMany();
-    return colors;
+    return colors as Color[];
   } catch {
     return null;
   }
