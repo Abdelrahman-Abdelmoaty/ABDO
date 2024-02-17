@@ -51,7 +51,7 @@ export default function Cart() {
                   <td>
                     <div
                       className="w-4 h-4 rounded-full"
-                      style={{ backgroundColor: item.color }}
+                      style={{ backgroundColor: item.color.hexCode }}
                     ></div>
                   </td>
                   <td className="font-medium">

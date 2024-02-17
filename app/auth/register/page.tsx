@@ -38,7 +38,7 @@ export default function Register() {
     if (isLoaded && userId) {
       router.push("/");
     }
-  }, []);
+  }, [isLoaded, userId]);
 
   const form = useForm<RegisterForm>({
     resolver: zodResolver(RegisterSchema),

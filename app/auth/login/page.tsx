@@ -39,7 +39,7 @@ export default function Login() {
     if (isLoaded && userId) {
       router.push("/");
     }
-  }, []);
+  }, [isLoaded, userId]);
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(LoginSchema),
