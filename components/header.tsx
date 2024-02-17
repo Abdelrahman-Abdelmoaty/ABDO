@@ -1,12 +1,14 @@
 "use client";
-import { useClerk } from "@clerk/nextjs";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { useTransition } from "react";
 import Link from "next/link";
 import Cart from "./cart";
 
 export default function Header() {
-  const { user, signOut } = useClerk();
+  const { signOut } = useClerk();
+  const { isLoaded, userId } = useAuth();
+
   const [isPending, startTransition] = useTransition();
 
   const handleSignOut = async () => {
@@ -22,7 +24,7 @@ export default function Header() {
       </Link>
       <div className="space-x-2 flex items-center">
         <Cart />
-        {user ? (
+        {userId ? (
           <Button onClick={handleSignOut} disabled={isPending}>
             Logout
           </Button>

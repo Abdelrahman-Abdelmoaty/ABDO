@@ -20,6 +20,4 @@ export const getUserById = async (id: string) => {
   }
 };
 
-export const addToCart = async (userId: string, cartItemId: string) => {
-  
-};
+export const addToCart = async (userId: string, cartItemId: string) => {};

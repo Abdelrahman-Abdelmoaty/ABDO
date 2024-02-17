@@ -3,6 +3,7 @@
 import { getUserByEmail } from "@/data/user";
 import { LoginForm, LoginSchema } from "@/schemas/login";
 import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
 
 export const login = async (values: LoginForm) => {
   const validatedFields = LoginSchema.safeParse(values);
@@ -17,7 +18,9 @@ export const login = async (values: LoginForm) => {
 
   if (existingUser) {
     const isPasswordCorrect = await bcrypt.compare(password, existingUser.password || "");
-    if (isPasswordCorrect) return { success: "Logged in successfuly!" };
+    if (isPasswordCorrect) {
+      return { success: "Logged in successfuly!" };
+    }
   }
 
   return { error: "Wrong email or password!" };

@@ -23,13 +23,23 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { RegisterForm, RegisterSchema } from "@/schemas/register";
 import { register } from "@/actions/register";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { useSignUp } from "@clerk/nextjs";
+import { useAuth, useSignUp } from "@clerk/nextjs";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
+  const router = useRouter();
+  const { isLoaded, userId } = useAuth();
+
+  useEffect(() => {
+    if (isLoaded && userId) {
+      router.push("/");
+    }
+  }, []);
+
   const form = useForm<RegisterForm>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -44,7 +54,7 @@ export default function Register() {
 
   const [pending, startTransition] = useTransition();
 
-  const { isLoaded, signUp, setActive } = useSignUp();
+  const { signUp } = useSignUp();
 
   async function onSubmit(values: RegisterForm) {
     startTransition(async () => {
@@ -57,9 +67,12 @@ export default function Register() {
           emailAddress: values.email,
           password: values.password,
         });
-        console.log(result);
-        setSuccess(success);
+
+        // setSuccess(success);
+        toast.success(success);
+        router.push("/");
       }
+
       if (error) {
         setError(error);
       }
@@ -117,8 +130,8 @@ export default function Register() {
                 </FormItem>
               )}
             />
-            <FormItem>{error && <FormError message={success} />}</FormItem>
-            <FormItem>{success && <FormSuccess message={error} />}</FormItem>
+            <FormItem>{error && <FormError message={error} />}</FormItem>
+            <FormItem>{success && <FormSuccess message={success} />}</FormItem>
             <FormItem>
               <Button type="submit" disabled={pending}>
                 Register

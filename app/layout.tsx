@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/header";
 import CartProvider from "@/store/CartProvider";
@@ -29,7 +29,7 @@ export default function RootLayout({
             <div className="min-h-screen flex flex-col">
               <Header />
               <main className="flex-1 py-12 md:py-16 space-y-12 md:space-y-16">{children}</main>
-              <Toaster />
+              <Toaster position="bottom-right" richColors />
             </div>
           </body>
         </html>

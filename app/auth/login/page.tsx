@@ -22,14 +22,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { LoginForm, LoginSchema } from "@/schemas/login";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { toast } from "sonner";
 import { login } from "@/actions/login";
 import { useSignIn } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const router = useRouter();
+  const { isLoaded, userId } = useAuth();
+
+  useEffect(() => {
+    if (isLoaded && userId) {
+      router.push("/");
+    }
+  }, []);
+
   const form = useForm<LoginForm>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -43,24 +54,24 @@ export default function Login() {
 
   const [pending, startTransition] = useTransition();
 
-  const { isLoaded, signIn, setActive } = useSignIn();
+  const { signIn, setActive } = useSignIn();
 
   function onSubmit(values: LoginForm) {
     startTransition(async () => {
       setError("");
       setSuccess("");
       const { success, error } = await login(values);
+
       if (success) {
         const result = await signIn?.create({
           identifier: values.email,
           strategy: "password",
           password: values.password,
         });
-
-        if (result?.status === "complete") {
-          await setActive?.({ session: result.createdSessionId });
-        }
-        setSuccess(success);
+        await setActive?.({ session: result?.createdSessionId });
+        // setSuccess(success);
+        toast.success(success);
+        router.push("/");
       }
       if (error) {
         setError(error);
